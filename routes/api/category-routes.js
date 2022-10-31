@@ -3,20 +3,20 @@ const { Category } = require('../../models');
 
 // The `/api/categories` endpoint
 
-router.get('/', async(req, res) => {
+router.get('/', (req, res) => {
   // find all categories
   // be sure to include its associated Products
-  const userData = await Category.findAll().catch((err) => {
+  const userData = Category.findAll().catch((err) => {
     res.json(err);
   });
   res.json(userData);
 });
 
-router.get('/:id', async(req, res) => {
+router.get('/:id', (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
   try {
-    const userData = await Category.findByPk(req.params.id);
+    const userData = Category.findByPk(req.params.id);
     if (!userData) {
       res.status(404).json({ message: 'No category with this id!' });
       return;
@@ -27,10 +27,10 @@ router.get('/:id', async(req, res) => {
   }
 });
 
-router.post('/', async(req, res) => {
+router.post('/', (req, res) => {
   // create a new category
   try {
-    const userData = await Category.create(req.body);
+    const userData = Category.create(req.body);
     // 200 status code means the request is successful
     res.status(200).json(userData);
   } catch (err) {
@@ -39,10 +39,10 @@ router.post('/', async(req, res) => {
   }
 });
 
-router.put('/:id', async(req, res) => {
+router.put('/:id', (req, res) => {
   // update a category by its `id` value
   try {
-    const userData = await Category.update(req.body, {
+    const userData = Category.update(req.body, {
       where: {
         id: req.params.id,
       },
@@ -57,10 +57,10 @@ router.put('/:id', async(req, res) => {
   }
 });
 
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
   try {
-    const userData = await User.destroy({
+    const userData = User.destroy({
       where: {
         id: req.params.id,
       },
