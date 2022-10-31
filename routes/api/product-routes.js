@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product, Category, Tag, ProductTag } = require('../../models');
+const { Product, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
@@ -20,7 +20,7 @@ router.get('/:id', async(req, res) => {
   try {
     const userData = await Product.findByPk(req.params.id);
     if (!userData) {
-      res.status(404).json({ message: 'No user with this id!' });
+      res.status(404).json({ message: 'No product with this id!' });
       return;
     }
     res.status(200).json(userData);
